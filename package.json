@@ -1,0 +1,88 @@
+{
+  "name": "vstor",
+  "version": "1.0.0",
+  "description": "Typescript seed.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "clean": "node ./build clean",
+    "copy": "node ./build copy",
+    "compile": "node ./build compile",
+    "bump": "node ./build bump",
+    "build": "node ./build build",
+    "commit": "node ./build commit",
+    "docs": "node ./build docs",
+    "release": "node ./build release",
+    "test": "node ./build test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/origin1tech/vstor.git"
+  },
+  "build": {
+    "clean": [
+      "./dist"
+    ]
+  },
+  "keywords": [],
+  "author": "Origin1 Technologies <origin1tech@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/origin1tech/vstor/issues"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "exclude": [
+      "src/error.ts",
+      "src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "./build/spec"
+    ],
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
+  },
+  "homepage": "https://github.com/origin1tech/vstor#readme",
+  "dependencies": {
+    "chek": "^1.0.27",
+    "globby": "^6.1.0",
+    "mkdirp": "^0.5.1",
+    "multimatch": "^2.1.0",
+    "rimraf": "^2.6.2",
+    "through2": "^2.0.3",
+    "vinyl": "^2.1.0",
+    "vinyl-file": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/del": "^3.0.0",
+    "@types/globby": "^6.1.0",
+    "@types/mkdirp": "^0.5.1",
+    "@types/mocha": "^2.2.41",
+    "@types/multimatch": "^2.1.1",
+    "@types/node": "^8.0.28",
+    "@types/rimraf": "^2.0.2",
+    "@types/through2": "^2.0.33",
+    "@types/vinyl": "^2.0.1",
+    "chai": "^4.0.2",
+    "del": "^3.0.0",
+    "mocha": "^3.4.2",
+    "nyc": "^11.2.1",
+    "stiks": "^1.0.6",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.5.0",
+    "typedoc": "^0.7.1",
+    "typescript": "^2.5.2"
+  }
+}

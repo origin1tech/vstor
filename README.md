@@ -119,6 +119,34 @@ vstor
   });
 ```
 
+## Events
+
+VStor provides events you can listen on.
+
+<table>
+  <thead>
+    <tr><th>Event</th><th>Description</th><th>Arguments</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>changed</td><td>fires on any put to store.</td><td>file: VinylFile, vstor: VStor</td></tr>
+    <tr><td>copied</td><td>fires on file copied.</td><td>file: VinylFile, vstor: VStor</td></tr>
+    <tr><td>moved</td><td>fires on file moved.</td><td>file: VinylFile, vstor: VStor</td></tr>
+    <tr><td>appended</td><td>fires on file appended.</td><td>file: VinylFile, vstor: VStor</td></tr>
+    <tr><td>removed</td><td>fires on file removed.</td><td>file: VinylFile, vstor: VStor</td></tr>
+  </tbody>
+</table>
+
+#### Liten to any change event.
+
+Below describes listening to the "changed" event but all events work exactly the same.
+
+```ts
+vstor.on('changed', (file) => {
+  // do something with the changed file.
+});
+```
+
+
 ## Change
 
 See [CHANGE.md](CHANGE.md)

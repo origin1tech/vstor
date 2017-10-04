@@ -187,7 +187,7 @@ var VStor = /** @class */ (function (_super) {
      */
     VStor.prototype.put = function (file) {
         this._store[file.path] = file;
-        this.emit('change', file, this);
+        this.emit('changed', file, this);
         return this;
     };
     /**
@@ -351,6 +351,8 @@ var VStor = /** @class */ (function (_super) {
             if (transform)
                 contents = transform(contents, file.path);
             _this.write(_to, contents, file.stat);
+            file = _this.read(_to).toFile();
+            _this.emit('copied', file, _this);
         };
         if (chek_1.isFunction(options)) {
             transform = options;
@@ -398,6 +400,8 @@ var VStor = /** @class */ (function (_super) {
     VStor.prototype.move = function (from, to, options) {
         this.copy(from, to, options);
         this.remove(from, options);
+        var file = this.read(to).toFile();
+        this.emit('moved', file, this);
         return this;
     };
     /**
@@ -423,6 +427,8 @@ var VStor = /** @class */ (function (_super) {
             contents = contents + os_1.EOL + content;
         }
         this.write(to, contents);
+        var file = this.read(to).toFile();
+        this.emit('appended', file, this);
         return this;
     };
     /**
@@ -440,6 +446,7 @@ var VStor = /** @class */ (function (_super) {
             f.state = interfaces_1.VinylState.deleted;
             f.contents = null;
             _this.put(f);
+            _this.emit('removed', f, _this);
         };
         paths = this.globify(chek_1.toArray(paths)
             .map(function (p) { return _this.resolveKey(p); }));

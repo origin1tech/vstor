@@ -151,6 +151,26 @@
     done();
   });
 </code></pre>
+				<h2 id="events">Events</h2>
+				<p>VStor provides events you can listen on.</p>
+				<table>
+					<thead>
+						<tr><th>Event</th><th>Description</th><th>Arguments</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>changed</td><td>fires on any put to store.</td><td>file: VinylFile, vstor: VStor</td></tr>
+						<tr><td>copied</td><td>fires on file copied.</td><td>file: VinylFile, vstor: VStor</td></tr>
+						<tr><td>moved</td><td>fires on file moved.</td><td>file: VinylFile, vstor: VStor</td></tr>
+						<tr><td>appended</td><td>fires on file appended.</td><td>file: VinylFile, vstor: VStor</td></tr>
+						<tr><td>removed</td><td>fires on file removed.</td><td>file: VinylFile, vstor: VStor</td></tr>
+					</tbody>
+				</table>
+				<h4 id="liten-to-any-change-event-">Liten to any change event.</h4>
+				<p>Below describes listening to the &quot;changed&quot; event but all events work exactly the same.</p>
+				<pre><code class="lang-ts">vstor.on(<span class="hljs-string">'changed'</span>, <span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> {
+  <span class="hljs-comment">// do something with the changed file.</span>
+});
+</code></pre>
 				<h2 id="change">Change</h2>
 				<p>See <a href="CHANGE.md">CHANGE.md</a></p>
 				<h2 id="license">License</h2>

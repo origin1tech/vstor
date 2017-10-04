@@ -199,7 +199,7 @@ export class VStor extends EventEmitter {
    */
   private put(file: VinylFile) {
     this._store[file.path] = file;
-    this.emit('change', file, this);
+    this.emit('changed', file, this);
     return this;
   }
 
@@ -382,11 +382,13 @@ export class VStor extends EventEmitter {
     const copyFile = (_from: string, _to: string) => {
       if (!this.exists(_from))
         this.error(`cannot copy from source ${_from} the path does NOT exist.`);
-      const file: VinylFile = this.get(_from);
+      let file: VinylFile = this.get(_from);
       let contents = file.contents;
       if (transform) // call transform if defined.
         contents = transform(contents, file.path);
       this.write(_to, contents, file.stat);
+      file = this.read(_to).toFile();
+      this.emit('copied', file, this);
     };
 
     if (isFunction(options)) { // allows transform as third option.
@@ -446,6 +448,8 @@ export class VStor extends EventEmitter {
   move(from: string, to: string, options?: IGlobOptions) {
     this.copy(from, to, options);
     this.remove(from, options);
+    const file = this.read(to).toFile();
+    this.emit('moved', file, this);
     return this;
   }
 
@@ -473,6 +477,8 @@ export class VStor extends EventEmitter {
       contents = contents + EOL + <string>content;
     }
     this.write(to, contents);
+    const file = this.read(to).toFile();
+    this.emit('appended', file, this);
     return this;
   }
 
@@ -492,6 +498,7 @@ export class VStor extends EventEmitter {
       f.state = VinylState.deleted;
       f.contents = null;
       this.put(f);
+      this.emit('removed', f, this);
     };
 
     paths = this.globify(

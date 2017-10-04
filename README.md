@@ -105,7 +105,7 @@ vstor
 
 #### Apply filter on save.
 
-Filters accept:
+Filter callback args:
 
 + file - the Vinyl File object.
 + enc - the file encoding.

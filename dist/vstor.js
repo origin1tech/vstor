@@ -31,7 +31,7 @@ var DEFAULTS = {
     basePath: process.cwd(),
     jsonSpacer: 2 // number or string ex: '\t'.
 };
-var VStor = (function (_super) {
+var VStor = /** @class */ (function (_super) {
     __extends(VStor, _super);
     function VStor(options) {
         var _this = _super.call(this) || this;

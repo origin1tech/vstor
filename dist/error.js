@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var os_1 = require("os");
 var util_1 = require("util");
 var chek_1 = require("chek");
-var ErrorExtended = (function () {
+var ErrorExtended = /** @class */ (function () {
     function ErrorExtended(message, name, meta, prune) {
         this.meta = null;
         Error.captureStackTrace(this, this.constructor);

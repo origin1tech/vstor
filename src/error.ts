@@ -41,9 +41,10 @@ export class ErrorExtended {
       meta = undefined;
     }
 
+    const constructName = this.constructor['name'];
     this.message = message;
     this.meta = <IMap<any>>meta;
-    this.name = <string>name || this.constructor.name;
+    this.name = <string>name || constructName;
     this.stacktrace = this.prune(<number>prune);
     this.stackframes = this.parse();
     this.stack = this.stacktrace.join(EOL);

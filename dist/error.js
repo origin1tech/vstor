@@ -16,9 +16,10 @@ var ErrorExtended = /** @class */ (function () {
             prune = meta;
             meta = undefined;
         }
+        var constructName = this.constructor['name'];
         this.message = message;
         this.meta = meta;
-        this.name = name || this.constructor.name;
+        this.name = name || constructName;
         this.stacktrace = this.prune(prune);
         this.stackframes = this.parse();
         this.stack = this.stacktrace.join(os_1.EOL);

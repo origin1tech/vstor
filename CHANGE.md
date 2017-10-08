@@ -5,6 +5,7 @@ List of module changes.
 ### 10.7.2017 (v1.0.3)
 
 <table>
+  <tr><td>read()</td><td>better handling for default values.</td></tr>
   <tr><td>.npmignore</td><td>ignore build and source folders.</td></tr>
 </table>
 

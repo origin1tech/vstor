@@ -132,17 +132,29 @@ var VStor = /** @class */ (function (_super) {
             return false;
         }
     };
-    VStor.prototype.readAs = function (file, contents) {
+    /**
+     * Read As
+     * : Private method for reading files.
+     *
+     * @param path the path or VinylFile to read.
+     * @param def a default value on empty.
+     */
+    VStor.prototype.readAs = function (path, def) {
         var _this = this;
+        var file = this.normalizeFile(path);
+        if (this.isDeleted(path) || this.isEmpty(path) && !def)
+            this.error(file.relative + " could NOT be found.");
         return {
             toBuffer: function () {
-                return contents;
+                return (file && file.contents) || def;
             },
             toFile: function () {
-                return file;
+                return file || def;
             },
             toValue: function () {
-                var str = contents.toString();
+                if (!file || !file.contents)
+                    return def;
+                var str = file.contents.toString();
                 return _this.isJSON(str) || str;
             }
         };
@@ -301,13 +313,7 @@ var VStor = /** @class */ (function (_super) {
      * @param def any default values.
      */
     VStor.prototype.read = function (path, def) {
-        var file = this.normalizeFile(path);
-        if (this.isDeleted(path) || this.isEmpty(path)) {
-            if (!def)
-                this.error(file.relative + " could NOT be found.");
-            return def;
-        }
-        return this.readAs(file, file.contents);
+        return this.readAs(path, def);
     };
     /**
      * Write

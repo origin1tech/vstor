@@ -55,7 +55,6 @@ const actions = {
     opts = '-p ./src/tsconfig.json'
     cmd = normalize('./node_modules/typescript/bin/tsc', opts);
     exec.node(cmd);
-    // log.info(`successfully compiled ${pkg.name}.`);
     return actions;
   },
 

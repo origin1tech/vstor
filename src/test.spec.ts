@@ -18,6 +18,11 @@ describe('VStor', () => {
     assert.equal(val, 'Hello VStor.');
   });
 
+  it('should read file and return default value.', () => {
+    const val = vstor.read('src/test/bad.txt', 'default value.').toValue();
+    assert.equal(val, 'default value.');
+  });
+
   it('should check if has key "hello.txt".', () => {
     const val = vstor.hasKey('src/test/hello.txt');
     assert.isNotNull(val);

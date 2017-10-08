@@ -8,7 +8,7 @@ export declare class VStor extends EventEmitter {
     private _base;
     private _store;
     options: IVStorOptions;
-    constructor(options?: IVStorOptions);
+    constructor(options?: Partial<IVStorOptions>);
     /**
      * Error
      * : Internal method for throwing errors.
@@ -59,7 +59,14 @@ export declare class VStor extends EventEmitter {
      * @param val the value to inspect as JSON.
      */
     private isJSON(val);
-    private readAs(file, contents);
+    /**
+     * Read As
+     * : Private method for reading files.
+     *
+     * @param path the path or VinylFile to read.
+     * @param def a default value on empty.
+     */
+    private readAs(path, def?);
     /**
      * Load
      * : Loads a file or creates news on failed.

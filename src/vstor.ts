@@ -31,7 +31,7 @@ export class VStor extends EventEmitter {
 
   options: IVStorOptions;
 
-  constructor(options?: IVStorOptions) {
+  constructor(options?: Partial<IVStorOptions>) {
     super();
     this.options = extend<IVStorOptions>({}, DEFAULTS, options);
     if (this.options.basePath)
@@ -141,19 +141,36 @@ export class VStor extends EventEmitter {
 
   }
 
-  private readAs(file: VinylFile, contents: Buffer | NodeJS.ReadableStream): IReadMethods {
+  /**
+   * Read As
+   * : Private method for reading files.
+   *
+   * @param path the path or VinylFile to read.
+   * @param def a default value on empty.
+   */
+  private readAs(path: string | VinylFile, def?: any):
+    IReadMethods {
+
+    const file = this.normalizeFile(path);
+
+    if (this.isDeleted(path) || this.isEmpty(path) && !def)
+      this.error(`${file.relative} could NOT be found.`);
+
     return {
       toBuffer: (): Buffer | NodeJS.ReadableStream => {
-        return contents;
+        return (file && file.contents) || def;
       },
       toFile: (): File => {
-        return file;
+        return file || def;
       },
       toValue: <T>(): T => {
-        const str = contents.toString();
+        if (!file || !file.contents)
+          return def;
+        const str = file.contents.toString();
         return this.isJSON(str) || str;
       }
     };
+
   }
 
   // VINYL FILE IO //
@@ -326,13 +343,7 @@ export class VStor extends EventEmitter {
    * @param def any default values.
    */
   read(path: string | VinylFile, def?: any): IReadMethods {
-    const file = this.normalizeFile(path);
-    if (this.isDeleted(path) || this.isEmpty(path)) {
-      if (!def)
-        this.error(`${file.relative} could NOT be found.`);
-      return def;
-    }
-    return this.readAs(file, file.contents);
+    return this.readAs(path, def);
   }
 
   /**

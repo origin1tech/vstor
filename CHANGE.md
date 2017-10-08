@@ -2,7 +2,7 @@
 
 List of module changes.
 
-### 10.7.2017 (v1.0.3)
+### 10.7.2017 (v1.0.3-5)
 
 <table>
   <tr><td>read()</td><td>better handling for default values.</td></tr>

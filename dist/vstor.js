@@ -327,7 +327,7 @@ var VStor = /** @class */ (function (_super) {
     VStor.prototype.write = function (path, contents, stat) {
         var file = this.normalizeFile(path);
         if (!chek_1.isBuffer(contents) && !chek_1.isString(contents) && !chek_1.isPlainObject(contents))
-            this.error("cannot write " + file.relative + " expected Buffer or String but got " + typeof contents);
+            this.error("cannot write " + file.relative + " expected Buffer, String or Object but got " + typeof contents);
         if (chek_1.isPlainObject(contents))
             contents = JSON.stringify(contents, null, this.options.jsonSpacer || null);
         file.isNew = this.isEmpty(file);

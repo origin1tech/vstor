@@ -360,7 +360,7 @@ export class VStor extends EventEmitter {
     const file = this.normalizeFile(path);
 
     if (!isBuffer(contents) && !isString(contents) && !isPlainObject(contents))
-      this.error(`cannot write ${file.relative} expected Buffer or String but got ${typeof contents}`);
+      this.error(`cannot write ${file.relative} expected Buffer, String or Object but got ${typeof contents}`);
 
     if (isPlainObject(contents))
       contents = JSON.stringify(contents, null, this.options.jsonSpacer || null);

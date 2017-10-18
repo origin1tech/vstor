@@ -10,14 +10,6 @@ export declare class VStor extends EventEmitter {
     options: IVStorOptions;
     constructor(options?: Partial<IVStorOptions>);
     /**
-     * Error
-     * : Internal method for throwing errors.
-     *
-     * @param message the error's message.
-     * @param meta any meta data.
-     */
-    private error(message, meta?);
-    /**
      * Extend
      * : Extends glob options.
      *
@@ -100,6 +92,10 @@ export declare class VStor extends EventEmitter {
      */
     private stream();
     readonly store: IMap<VinylFile>;
+    /**
+     * Alias to move.
+     */
+    readonly rename: (from: string, to: string, options?: IGlobOptions) => this;
     /**
       * Globify
       * : Ensures file path is glob or append pattern.

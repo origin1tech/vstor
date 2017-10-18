@@ -10,7 +10,6 @@ import { sync as rimsync } from 'rimraf';
 import { sync as mksync } from 'mkdirp';
 import * as multimatch from 'multimatch';
 import { EOL } from 'os';
-import { ErrorExtended } from './error';
 import { IGlobOptions, VinylFile, VinylState, IMap, IReadMethods, CopyTransform, SaveCallback, ThroughFilter, IVStorOptions } from './interfaces';
 import { extend, isString, isPlainObject, toArray, isArray, isBuffer, isDirectory, isFile, isFunction, isUndefined, keys, noopIf } from 'chek';
 
@@ -39,18 +38,6 @@ export class VStor extends EventEmitter {
   }
 
   // UTILS //
-
-  /**
-   * Error
-   * : Internal method for throwing errors.
-   *
-   * @param message the error's message.
-   * @param meta any meta data.
-   */
-  private error(message: string, meta?: IMap<any>) {
-    const name = 'Vstor:FileSys';
-    throw new ErrorExtended(message, name, meta, 1);
-  }
 
   /**
    * Extend
@@ -83,7 +70,7 @@ export class VStor extends EventEmitter {
         .slice(1)
         .reduce((p, f) => {
           if (!f.match(/^([A-Za-z]:)?\/|\\/))
-            this.error('cannot get directory using base directory of undefined.');
+            throw new Error('Cannot get directory using base directory of undefined.');
           const s = f.split(exp);
           let i = 0;
           while (p[i] === f[i] && i < Math.min(p.length, s.length))
@@ -154,7 +141,7 @@ export class VStor extends EventEmitter {
     const file = this.normalizeFile(path);
 
     if (this.isDeleted(path) || this.isEmpty(path) && !def)
-      this.error(`${file.relative} could NOT be found.`);
+      throw new Error(`${file.relative} could NOT be found.`);
 
     return {
       toBuffer: (): Buffer | NodeJS.ReadableStream => {
@@ -252,6 +239,13 @@ export class VStor extends EventEmitter {
     return this._store;
   }
 
+  /**
+   * Alias to move.
+   */
+  get rename() {
+    return this.move;
+  }
+
   // VSTOR METHODS //
 
   /**
@@ -287,7 +281,7 @@ export class VStor extends EventEmitter {
     if (stats.isDirectory())  // if dir append glob pattern.
       return join(<string>path, '**');
 
-    this.error('path is neither a file or directory.');
+    throw new Error('Path is neither a file or directory.');
 
   }
 
@@ -360,7 +354,7 @@ export class VStor extends EventEmitter {
     const file = this.normalizeFile(path);
 
     if (!isBuffer(contents) && !isString(contents) && !isPlainObject(contents))
-      this.error(`cannot write ${file.relative} expected Buffer, String or Object but got ${typeof contents}`);
+      throw new Error(`Cannot write ${file.relative} expected Buffer, String or Object but got ${typeof contents}`);
 
     if (isPlainObject(contents))
       contents = JSON.stringify(contents, null, this.options.jsonSpacer || null);
@@ -392,7 +386,7 @@ export class VStor extends EventEmitter {
 
     const copyFile = (_from: string, _to: string) => {
       if (!this.exists(_from))
-        this.error(`cannot copy from source ${_from} the path does NOT exist.`);
+        throw new Error(`Cannot copy from source ${_from} the path does NOT exist.`);
       let file: VinylFile = this.get(_from);
       let contents = file.contents;
       if (transform) // call transform if defined.
@@ -427,13 +421,13 @@ export class VStor extends EventEmitter {
     paths = paths.concat(matches); // concat glob paths w/ store matches.
 
     if (!paths.length)
-      this.error(`cannot copy using paths of undefined.`);
+      throw new Error(`Cannot copy using paths of undefined.`);
 
     if (isArray(from) || isGlob(from) || (!isArray(from) && !this.exists(<string>from))) {
       if (!existsSync(to) && !/\..*$/.test(to)) // make the dir
         mksync(to);
       if (!isDirectory(to)) // if not dir throw error.
-        this.error('destination must must be directory when copying multiple.');
+        throw new Error('Destination must must be directory when copying multiple.');
       rootPath = this.commonDir(origFrom);
     }
 
@@ -481,7 +475,7 @@ export class VStor extends EventEmitter {
       contents = contents.replace(/\s+$/, '');
     if (isPlainObject(content) || isPlainObject(contents)) {
       if (!isPlainObject(contents) || !isPlainObject(content)) // both must be object.
-        this.error(`attempted to append object using type ${typeof contents}.`);
+        throw new Error(`Attempted to append object using type ${typeof contents}.`);
       contents = extend<IMap<any>>({}, contents, content);
     }
     else {

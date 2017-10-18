@@ -21,7 +21,6 @@ var rimraf_1 = require("rimraf");
 var mkdirp_1 = require("mkdirp");
 var multimatch = require("multimatch");
 var os_1 = require("os");
-var error_1 = require("./error");
 var interfaces_1 = require("./interfaces");
 var chek_1 = require("chek");
 var GLOB_DEFAULTS = {
@@ -45,17 +44,6 @@ var VStor = /** @class */ (function (_super) {
     }
     // UTILS //
     /**
-     * Error
-     * : Internal method for throwing errors.
-     *
-     * @param message the error's message.
-     * @param meta any meta data.
-     */
-    VStor.prototype.error = function (message, meta) {
-        var name = 'Vstor:FileSys';
-        throw new error_1.ErrorExtended(message, name, meta, 1);
-    };
-    /**
      * Extend
      * : Extends glob options.
      *
@@ -71,7 +59,6 @@ var VStor = /** @class */ (function (_super) {
      * @param paths the file paths to find common directory for.
      */
     VStor.prototype.commonDir = function (paths) {
-        var _this = this;
         paths = chek_1.toArray(paths)
             .filter(function (p) {
             return p !== null && p.charAt(0) !== '!';
@@ -82,7 +69,7 @@ var VStor = /** @class */ (function (_super) {
             .slice(1)
             .reduce(function (p, f) {
             if (!f.match(/^([A-Za-z]:)?\/|\\/))
-                _this.error('cannot get directory using base directory of undefined.');
+                throw new Error('Cannot get directory using base directory of undefined.');
             var s = f.split(exp);
             var i = 0;
             while (p[i] === f[i] && i < Math.min(p.length, s.length))
@@ -143,7 +130,7 @@ var VStor = /** @class */ (function (_super) {
         var _this = this;
         var file = this.normalizeFile(path);
         if (this.isDeleted(path) || this.isEmpty(path) && !def)
-            this.error(file.relative + " could NOT be found.");
+            throw new Error(file.relative + " could NOT be found.");
         return {
             toBuffer: function () {
                 return (file && file.contents) || def;
@@ -236,6 +223,16 @@ var VStor = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(VStor.prototype, "rename", {
+        /**
+         * Alias to move.
+         */
+        get: function () {
+            return this.move;
+        },
+        enumerable: true,
+        configurable: true
+    });
     // VSTOR METHODS //
     /**
       * Globify
@@ -263,7 +260,7 @@ var VStor = /** @class */ (function (_super) {
             return path;
         if (stats.isDirectory())
             return path_1.join(path, '**');
-        this.error('path is neither a file or directory.');
+        throw new Error('Path is neither a file or directory.');
     };
     /**
      * Resolve Key
@@ -327,7 +324,7 @@ var VStor = /** @class */ (function (_super) {
     VStor.prototype.write = function (path, contents, stat) {
         var file = this.normalizeFile(path);
         if (!chek_1.isBuffer(contents) && !chek_1.isString(contents) && !chek_1.isPlainObject(contents))
-            this.error("cannot write " + file.relative + " expected Buffer, String or Object but got " + typeof contents);
+            throw new Error("Cannot write " + file.relative + " expected Buffer, String or Object but got " + typeof contents);
         if (chek_1.isPlainObject(contents))
             contents = JSON.stringify(contents, null, this.options.jsonSpacer || null);
         file.isNew = this.isEmpty(file);
@@ -351,7 +348,7 @@ var VStor = /** @class */ (function (_super) {
         var _this = this;
         var copyFile = function (_from, _to) {
             if (!_this.exists(_from))
-                _this.error("cannot copy from source " + _from + " the path does NOT exist.");
+                throw new Error("Cannot copy from source " + _from + " the path does NOT exist.");
             var file = _this.get(_from);
             var contents = file.contents;
             if (transform)
@@ -379,12 +376,12 @@ var VStor = /** @class */ (function (_super) {
         });
         paths = paths.concat(matches); // concat glob paths w/ store matches.
         if (!paths.length)
-            this.error("cannot copy using paths of undefined.");
+            throw new Error("Cannot copy using paths of undefined.");
         if (chek_1.isArray(from) || globby_1.hasMagic(from) || (!chek_1.isArray(from) && !this.exists(from))) {
             if (!fs_1.existsSync(to) && !/\..*$/.test(to))
                 mkdirp_1.sync(to);
             if (!chek_1.isDirectory(to))
-                this.error('destination must must be directory when copying multiple.');
+                throw new Error('Destination must must be directory when copying multiple.');
             rootPath = this.commonDir(origFrom);
         }
         paths.forEach(function (f) {
@@ -426,7 +423,7 @@ var VStor = /** @class */ (function (_super) {
             contents = contents.replace(/\s+$/, '');
         if (chek_1.isPlainObject(content) || chek_1.isPlainObject(contents)) {
             if (!chek_1.isPlainObject(contents) || !chek_1.isPlainObject(content))
-                this.error("attempted to append object using type " + typeof contents + ".");
+                throw new Error("Attempted to append object using type " + typeof contents + ".");
             contents = chek_1.extend({}, contents, content);
         }
         else {

@@ -1,7 +1,7 @@
 {
   "name": "vstor",
-  "version": "1.0.6",
-  "description": "Typescript seed.",
+  "version": "1.0.7",
+  "description": "Vinyl file store written in Typescript.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {

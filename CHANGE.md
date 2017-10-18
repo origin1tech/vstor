@@ -2,6 +2,12 @@
 
 List of module changes.
 
+### 10.17.2017 (v1.0.7)
+
+<table>
+  <tr><td>ErrorExtended</td><td>no need for this advanced Error class roll back to standard Error.</td></tr>
+</table>
+
 ### 10.3.2017 (v1.0.6)
 
 <table>

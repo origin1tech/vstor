@@ -401,6 +401,10 @@ var VStor = /** @class */ (function (_super) {
      * @param options glob options.
      */
     VStor.prototype.move = function (from, to, options) {
+        options = options || {};
+        if (!chek_1.isValue(options.nodir))
+            options.nodir = false;
+        options = this.extendOptions(options);
         this.copy(from, to, options);
         this.remove(from, options);
         var file = this.read(to).toFile();
@@ -443,6 +447,9 @@ var VStor = /** @class */ (function (_super) {
      */
     VStor.prototype.remove = function (paths, options) {
         var _this = this;
+        options = options || {};
+        if (!chek_1.isValue(options.nodir))
+            options.nodir = false;
         options = this.extendOptions(options);
         var removeFile = function (p) {
             var f = _this.get(p);
@@ -453,8 +460,8 @@ var VStor = /** @class */ (function (_super) {
         };
         paths = this.globify(chek_1.toArray(paths)
             .map(function (p) { return _this.resolveKey(p); }));
-        globby_1.sync(paths, options) // set as 'deleted';
-            .forEach(function (p) { return removeFile(p); });
+        var gPaths = globby_1.sync(paths, options); // set as 'deleted';
+        gPaths.forEach(function (p) { return removeFile(p); });
         this.each(function (f) {
             if (multimatch([f.path], paths).length)
                 removeFile(f.path);
@@ -481,7 +488,7 @@ var VStor = /** @class */ (function (_super) {
                 this.push(file);
             done();
         });
-        filters = [modifiy].concat(filters);
+        filters = filters.concat(modifiy);
         var save = through.obj(function (file, enc, done) {
             store.put(file);
             if (file.state === interfaces_1.VinylState.modified) {
@@ -500,8 +507,8 @@ var VStor = /** @class */ (function (_super) {
             done();
         });
         filters.push(save);
-        var stream = filters.reduce(function (stream, filter) {
-            return stream.pipe(filter);
+        var stream = filters.reduce(function (s, filter) {
+            return s.pipe(filter);
         }, this.stream());
         stream.on('finish', chek_1.noopIf(fn));
         return this;

@@ -1,7 +1,6 @@
 import * as chai from 'chai';
 import * as mocha from 'mocha';
 import { existsSync, unlinkSync } from 'fs';
-import { sync as delSync } from 'del';
 import { EOL } from 'os';
 
 const expect = chai.expect;
@@ -95,10 +94,16 @@ describe('VStor', () => {
       });
   });
 
+  it('should remove "todir".', (done) => {
+    vstor
+      .remove('src/test/todir')
+      .save(() => {
+        assert.equal(existsSync('./src/test/todir'), false);
+        done();
+      });
+  });
+
   after((done) => { // cleanup.
-    delSync([ // remove copy to test dir.
-      './src/test/todir'
-    ]);
     done();
   });
 

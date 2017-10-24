@@ -11,7 +11,7 @@ import { sync as mksync } from 'mkdirp';
 import * as multimatch from 'multimatch';
 import { EOL } from 'os';
 import { IGlobOptions, VinylFile, VinylState, IMap, IReadMethods, CopyTransform, SaveCallback, ThroughFilter, IVStorOptions } from './interfaces';
-import { extend, isString, isPlainObject, toArray, isArray, isBuffer, isDirectory, isFile, isFunction, isUndefined, keys, noopIf } from 'chek';
+import { extend, isString, isPlainObject, toArray, isArray, isBuffer, isDirectory, isFile, isFunction, isUndefined, keys, noopIf, isValue } from 'chek';
 
 const GLOB_DEFAULTS: IGlobOptions = {
   nodir: true
@@ -451,6 +451,10 @@ export class VStor extends EventEmitter {
    * @param options glob options.
    */
   move(from: string, to: string, options?: IGlobOptions) {
+    options = options || {};
+    if (!isValue(options.nodir))
+      options.nodir = false;
+    options = this.extendOptions(options);
     this.copy(from, to, options);
     this.remove(from, options);
     const file = this.read(to).toFile();
@@ -496,6 +500,10 @@ export class VStor extends EventEmitter {
    */
   remove(paths: string | string[], options?: IGlobOptions) {
 
+    options = options || {};
+    if (!isValue(options.nodir))
+      options.nodir = false;
+
     options = this.extendOptions(options);
 
     const removeFile = (p) => {
@@ -511,10 +519,11 @@ export class VStor extends EventEmitter {
         .map(p => this.resolveKey(p))
     );
 
-    gsync(paths, options) // set as 'deleted';
-      .forEach(p => removeFile(p));
+    const gPaths = gsync(paths, options); // set as 'deleted';
 
-    this.each((f) => { // iterate store if match remove.
+    gPaths.forEach(p => removeFile(p));
+
+    this.each((f: VinylFile) => { // iterate store if match remove.
       if (multimatch([f.path], paths).length)
         removeFile(f.path);
     });
@@ -547,7 +556,7 @@ export class VStor extends EventEmitter {
       done();
     });
 
-    filters = [modifiy].concat(<Transform[]>filters);
+    filters = (filters as Transform[]).concat(modifiy);
 
     const save = through.obj(function (file: VinylFile, enc: string, done: Function) {
       store.put(file);
@@ -569,8 +578,8 @@ export class VStor extends EventEmitter {
 
     filters.push(save);
 
-    const stream = filters.reduce((stream: Transform, filter: any) => {
-      return stream.pipe(filter);
+    const stream = filters.reduce((s: Transform, filter: any) => {
+      return s.pipe(filter);
     }, this.stream());
 
     stream.on('finish', noopIf(fn));

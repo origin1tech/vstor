@@ -585,7 +585,6 @@ var VStor = /** @class */ (function (_super) {
             });
             stream.on('finish', function () {
                 _this.removeQueue(stream);
-                console.log('stream finished queue len:', _this._queue.length);
                 chek_1.noopIf(fn)();
                 resolve();
             });

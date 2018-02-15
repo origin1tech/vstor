@@ -664,7 +664,6 @@ export class VStor extends EventEmitter {
 
       stream.on('finish', () => {
         this.removeQueue(stream);
-        console.log('stream finished queue len:', this._queue.length);
         noopIf(fn)();
         resolve();
       });

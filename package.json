@@ -1,6 +1,6 @@
 {
   "name": "vstor",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Vinyl file store written in Typescript.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

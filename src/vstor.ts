@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import * as through from 'through2';
 import { Transform } from 'stream';
 import { resolve, join, relative, dirname, parse } from 'path';
-import { existsSync, statSync, Stats, writeFileSync } from 'fs';
+import { existsSync, statSync, Stats, writeFileSync, mkdirSync } from 'fs';
 import * as vfile from 'vinyl-file';
 import * as File from 'vinyl';
 import { sync as rimsync } from 'rimraf';
@@ -17,9 +17,11 @@ const GLOB_DEFAULTS: IGlobOptions = {
   nodir: true
 };
 
-const DEFAULTS: Partial<IVStorOptions> = {
+const DEFAULTS: IVStorOptions = {
   basePath: process.cwd(), // a base dir within cwd for store.
-  jsonSpacer: 2  // number or string ex: '\t'.
+  jsonSpacer: 2, // number or string ex: '\t'.
+  saveOnExit: false,  // when true call save before exit, waitOnExit will be set to true.
+  waitOnExit: false // when true waits to exit until save queue is empty.
 };
 
 export class VStor extends EventEmitter {
@@ -27,17 +29,73 @@ export class VStor extends EventEmitter {
   private _cwd = process.cwd();
   private _base = process.cwd();
   private _store: IMap<VinylFile> = {};
+  private _queue: Transform[] = [];
 
   options: IVStorOptions;
 
-  constructor(options?: Partial<IVStorOptions>) {
+  constructor(options?: IVStorOptions) {
+
     super();
     this.options = extend<IVStorOptions>({}, DEFAULTS, options);
+
     if (this.options.basePath)
       this._base = resolve(this._cwd, this.options.basePath);
+
+    if (this.options.waitOnExit || this.options.saveOnExit) {
+      let type = this.options.saveOnExit ? 'save' : null;
+      if (type === 'save')
+        this.options.waitOnExit = true;
+      type = !type && this.options.waitOnExit ? 'wait' : type;
+      // only add listener if type.
+      if (type) {
+        process.on('exit', this.exitHandler.bind(this, type));
+        process.on('uncaughtException', this.exitHandler.bind(this, 'error'));
+      }
+    }
+
   }
 
   // UTILS //
+
+  /**
+   * Exit Handler
+   *
+   * @param type the type of handler.
+   * @param err uncaught error.
+   */
+  private exitHandler(type, err) {
+
+    if (type === 'save')
+      this.save();
+
+    // Loop until queue is empty.
+    const checkQueue = () => {
+      if (this._queue.length) {
+        setTimeout(() => {
+          checkQueue();
+        }, null);
+      }
+      else {
+        process.removeListener('exit', this.exitHandler);
+        process.removeListener('uncaughtException', this.exitHandler);
+        if (err) throw err;
+      }
+    };
+
+    checkQueue();
+
+  }
+
+  /**
+   * Remove Transform
+   * Removes transform from queue.
+   *
+   * @param transform to remove.
+   */
+  private removeQueue(transform: Transform) {
+    if (~this._queue.indexOf(transform))
+      this._queue.splice(this._queue.indexOf(transform), 1);
+  }
 
   /**
    * Extend
@@ -286,6 +344,14 @@ export class VStor extends EventEmitter {
   }
 
   /**
+   * Is Streaming
+   * Flag indicating if is streaming.
+   */
+  get queue() {
+    return this._queue;
+  }
+
+  /**
    * Resolve Key
    * : Takes a path and resolves it relative to base.
    *
@@ -432,10 +498,14 @@ export class VStor extends EventEmitter {
     }
 
     paths.forEach((f) => {
-      if (rootPath) // copy multiple.
+      if (rootPath) {
+        // copy multiple.
         copyFile(f, join(to, relative(<string>rootPath, f)));
-      else // copy single file.
+      }
+      else {
+        // copy single file.
         copyFile(f, to);
+      }
     });
 
     return this;
@@ -578,13 +648,28 @@ export class VStor extends EventEmitter {
 
     filters.push(save);
 
-    const stream = filters.reduce((s: Transform, filter: any) => {
+    const stream: Transform = filters.reduce((s: Transform, filter: any) => {
       return s.pipe(filter);
     }, this.stream());
 
-    stream.on('finish', noopIf(fn));
+    this._queue.push(stream);
 
-    return this;
+    return new Promise((resolve, reject) => {
+
+      stream.on('error', (err: Error) => {
+        this.removeQueue(stream);
+        noopIf(fn)(err);
+        reject(err);
+      });
+
+      stream.on('finish', () => {
+        this.removeQueue(stream);
+        console.log('stream finished queue len:', this._queue.length);
+        noopIf(fn)();
+        resolve();
+      });
+
+    });
 
   }
 

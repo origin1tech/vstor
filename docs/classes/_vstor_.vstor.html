@@ -97,6 +97,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#_base" class="tsd-kind-icon">_base</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#_cwd" class="tsd-kind-icon">_cwd</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#_queue" class="tsd-kind-icon">_queue</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#_store" class="tsd-kind-icon">_store</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_vstor_.vstor.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_vstor_.vstor.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a></li>
@@ -105,6 +106,7 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_vstor_.vstor.html#queue" class="tsd-kind-icon">queue</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_vstor_.vstor.html#rename" class="tsd-kind-icon">rename</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_vstor_.vstor.html#store" class="tsd-kind-icon">store</a></li>
 							</ul>
@@ -121,6 +123,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_vstor_.vstor.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_vstor_.vstor.html#exists" class="tsd-kind-icon">exists</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#existswithvalue" class="tsd-kind-icon">exists<wbr>With<wbr>Value</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#exithandler" class="tsd-kind-icon">exit<wbr>Handler</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#extendoptions" class="tsd-kind-icon">extend<wbr>Options</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_vstor_.vstor.html#getmaxlisteners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a></li>
@@ -144,6 +147,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_vstor_.vstor.html#remove" class="tsd-kind-icon">remove</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_vstor_.vstor.html#removealllisteners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_vstor_.vstor.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_vstor_.vstor.html#removequeue" class="tsd-kind-icon">remove<wbr>Queue</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_vstor_.vstor.html#resolvekey" class="tsd-kind-icon">resolve<wbr>Key</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_vstor_.vstor.html#save" class="tsd-kind-icon">save</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_vstor_.vstor.html#setmaxlisteners" class="tsd-kind-icon">set<wbr>Max<wbr>Listeners</a></li>
@@ -161,19 +165,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new VStor<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ivstoroptions.html" class="tsd-signature-type">IVStorOptions</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_vstor_.vstor.html" class="tsd-signature-type">VStor</a></li>
+						<li class="tsd-signature tsd-kind-icon">new VStor<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_interfaces_.ivstoroptions.html" class="tsd-signature-type">IVStorOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_vstor_.vstor.html" class="tsd-signature-type">VStor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L31">vstor.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L34">vstor.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ivstoroptions.html" class="tsd-signature-type">IVStorOptions</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_interfaces_.ivstoroptions.html" class="tsd-signature-type">IVStorOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_vstor_.vstor.html" class="tsd-signature-type">VStor</a></h4>
@@ -189,7 +193,7 @@
 					<div class="tsd-signature tsd-kind-icon">_base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;process.cwd()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L28">vstor.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L30">vstor.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +203,17 @@
 					<div class="tsd-signature tsd-kind-icon">_cwd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;process.cwd()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L27">vstor.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L29">vstor.ts:29</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_queue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _queue</h3>
+					<div class="tsd-signature tsd-kind-icon">_queue<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L32">vstor.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -209,7 +223,7 @@
 					<div class="tsd-signature tsd-kind-icon">_store<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_.imap.html" class="tsd-signature-type">IMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.vinylfile.html" class="tsd-signature-type">VinylFile</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L29">vstor.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L31">vstor.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -219,7 +233,7 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_interfaces_.ivstoroptions.html" class="tsd-signature-type">IVStorOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L31">vstor.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L34">vstor.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -230,13 +244,36 @@
 					<aside class="tsd-sources">
 						<p>Inherited from EventEmitter.defaultMaxListeners</p>
 						<ul>
-							<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:780</li>
+							<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:780</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="queue" class="tsd-anchor"></a>
+					<h3>queue</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> queue<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L350">vstor.ts:350</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Is Streaming
+									Flag indicating if is streaming.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="rename" class="tsd-anchor"></a>
 					<h3>rename</h3>
@@ -247,7 +284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L245">vstor.ts:245</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L303">vstor.ts:303</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -269,7 +306,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L238">vstor.ts:238</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L296">vstor.ts:296</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_interfaces_.imap.html" class="tsd-signature-type">IMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.vinylfile.html" class="tsd-signature-type">VinylFile</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -291,7 +328,7 @@
 								<p>Inherited from EventEmitter.addListener</p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:782</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:782</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -335,7 +372,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L473">vstor.ts:473</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L543">vstor.ts:543</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -379,7 +416,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L58">vstor.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L116">vstor.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -411,7 +448,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L385">vstor.ts:385</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L451">vstor.ts:451</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -461,7 +498,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L216">vstor.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L274">vstor.ts:274</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -516,7 +553,7 @@
 								<p>Inherited from EventEmitter.emit</p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:792</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:792</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -544,7 +581,7 @@
 								<p>Inherited from EventEmitter.eventNames</p>
 								<p>Overrides EventEmitter.eventNames</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:793</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:793</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -561,7 +598,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L315">vstor.ts:315</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L381">vstor.ts:381</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -593,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L101">vstor.ts:101</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L159">vstor.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -616,6 +653,43 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="exithandler" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> exit<wbr>Handler</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">exit<wbr>Handler<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L66">vstor.ts:66</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Exit Handler</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>the type of handler.</p>
+									</div>
+								</li>
+								<li>
+									<h5>err: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>uncaught error.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="extendoptions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> extend<wbr>Options</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -625,7 +699,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L48">vstor.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L106">vstor.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -657,7 +731,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L194">vstor.ts:194</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L252">vstor.ts:252</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -691,7 +765,7 @@
 								<p>Inherited from EventEmitter.getMaxListeners</p>
 								<p>Overrides EventEmitter.getMaxListeners</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:790</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:790</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -708,7 +782,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L257">vstor.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L315">vstor.ts:315</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -740,7 +814,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L304">vstor.ts:304</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L370">vstor.ts:370</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -772,7 +846,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L111">vstor.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L169">vstor.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -804,7 +878,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L326">vstor.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L392">vstor.ts:392</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -836,7 +910,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L121">vstor.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L179">vstor.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -870,7 +944,7 @@
 								<p>Inherited from EventEmitter.listenerCount</p>
 								<p>Overrides EventEmitter.listenerCount</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:794</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:794</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -895,7 +969,7 @@
 								<p>Inherited from EventEmitter.listeners</p>
 								<p>Overrides EventEmitter.listeners</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:791</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:791</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -918,7 +992,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L171">vstor.ts:171</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L229">vstor.ts:229</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -950,7 +1024,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L453">vstor.ts:453</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L523">vstor.ts:523</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -994,7 +1068,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L91">vstor.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L149">vstor.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1028,7 +1102,7 @@
 								<p>Inherited from EventEmitter.on</p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:783</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:783</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1074,7 +1148,7 @@
 								<p>Inherited from EventEmitter.once</p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:784</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:784</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1120,7 +1194,7 @@
 								<p>Inherited from EventEmitter.prependListener</p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:785</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:785</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1166,7 +1240,7 @@
 								<p>Inherited from EventEmitter.prependOnceListener</p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:786</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:786</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1210,7 +1284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L204">vstor.ts:204</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L262">vstor.ts:262</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1242,7 +1316,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L339">vstor.ts:339</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L405">vstor.ts:405</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1281,7 +1355,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L138">vstor.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L196">vstor.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1319,7 +1393,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L501">vstor.ts:501</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L571">vstor.ts:571</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1359,7 +1433,7 @@
 								<p>Inherited from EventEmitter.removeAllListeners</p>
 								<p>Overrides EventEmitter.removeAllListeners</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:788</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:788</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1384,7 +1458,7 @@
 								<p>Inherited from EventEmitter.removeListener</p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:787</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:787</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1418,6 +1492,38 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="removequeue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> remove<wbr>Queue</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Queue<span class="tsd-signature-symbol">(</span>transform<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L95">vstor.ts:95</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove Transform
+									Removes transform from queue.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>transform: <span class="tsd-signature-type">Transform</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>to remove.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="resolvekey" class="tsd-anchor"></a>
 					<h3>resolve<wbr>Key</h3>
@@ -1428,7 +1534,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L294">vstor.ts:294</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L360">vstor.ts:360</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1454,13 +1560,13 @@
 					<a name="save" class="tsd-anchor"></a>
 					<h3>save</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">save<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_interfaces_.html#savecallback" class="tsd-signature-type">SaveCallback</a>, fn<span class="tsd-signature-symbol">?: </span><a href="../modules/_interfaces_.html#savecallback" class="tsd-signature-type">SaveCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">save<span class="tsd-signature-symbol">(</span>filters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Transform</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_interfaces_.html#savecallback" class="tsd-signature-type">SaveCallback</a>, fn<span class="tsd-signature-symbol">?: </span><a href="../modules/_interfaces_.html#savecallback" class="tsd-signature-type">SaveCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L542">vstor.ts:542</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L612">vstor.ts:612</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1484,7 +1590,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1500,7 +1606,7 @@
 								<p>Inherited from EventEmitter.setMaxListeners</p>
 								<p>Overrides EventEmitter.setMaxListeners</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:789</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:789</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1523,7 +1629,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L227">vstor.ts:227</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L285">vstor.ts:285</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1546,7 +1652,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/018df6b/src/vstor.ts#L352">vstor.ts:352</a></li>
+									<li>Defined in <a href="https://github.com/origin1tech/vstor/blob/1662356/src/vstor.ts#L418">vstor.ts:418</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1591,7 +1697,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.listenerCount</p>
 								<ul>
-									<li>Defined in /Users/Carey/Documents/Projects/vstor/node_modules/@types/node/index.d.ts:779</li>
+									<li>Defined in /Volumes/DATA/Projects/Apps/vstor/node_modules/@types/node/index.d.ts:779</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1646,6 +1752,9 @@
 								<a href="_vstor_.vstor.html#_cwd" class="tsd-kind-icon">_cwd</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_vstor_.vstor.html#_queue" class="tsd-kind-icon">_queue</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_vstor_.vstor.html#_store" class="tsd-kind-icon">_store</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -1653,6 +1762,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="_vstor_.vstor.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_vstor_.vstor.html#queue" class="tsd-kind-icon">queue</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_vstor_.vstor.html#rename" class="tsd-kind-icon">rename</a>
@@ -1686,6 +1798,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_vstor_.vstor.html#existswithvalue" class="tsd-kind-icon">exists<wbr>With<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_vstor_.vstor.html#exithandler" class="tsd-kind-icon">exit<wbr>Handler</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_vstor_.vstor.html#extendoptions" class="tsd-kind-icon">extend<wbr>Options</a>
@@ -1755,6 +1870,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="_vstor_.vstor.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_vstor_.vstor.html#removequeue" class="tsd-kind-icon">remove<wbr>Queue</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_vstor_.vstor.html#resolvekey" class="tsd-kind-icon">resolve<wbr>Key</a>

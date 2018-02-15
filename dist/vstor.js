@@ -28,7 +28,9 @@ var GLOB_DEFAULTS = {
 };
 var DEFAULTS = {
     basePath: process.cwd(),
-    jsonSpacer: 2 // number or string ex: '\t'.
+    jsonSpacer: 2,
+    saveOnExit: false,
+    waitOnExit: false // when true waits to exit until save queue is empty.
 };
 var VStor = /** @class */ (function (_super) {
     __extends(VStor, _super);
@@ -37,12 +39,60 @@ var VStor = /** @class */ (function (_super) {
         _this._cwd = process.cwd();
         _this._base = process.cwd();
         _this._store = {};
+        _this._queue = [];
         _this.options = chek_1.extend({}, DEFAULTS, options);
         if (_this.options.basePath)
             _this._base = path_1.resolve(_this._cwd, _this.options.basePath);
+        if (_this.options.waitOnExit || _this.options.saveOnExit) {
+            var type = _this.options.saveOnExit ? 'save' : null;
+            if (type === 'save')
+                _this.options.waitOnExit = true;
+            type = !type && _this.options.waitOnExit ? 'wait' : type;
+            // only add listener if type.
+            if (type) {
+                process.on('exit', _this.exitHandler.bind(_this, type));
+                process.on('uncaughtException', _this.exitHandler.bind(_this, 'error'));
+            }
+        }
         return _this;
     }
     // UTILS //
+    /**
+     * Exit Handler
+     *
+     * @param type the type of handler.
+     * @param err uncaught error.
+     */
+    VStor.prototype.exitHandler = function (type, err) {
+        var _this = this;
+        if (type === 'save')
+            this.save();
+        // Loop until queue is empty.
+        var checkQueue = function () {
+            if (_this._queue.length) {
+                setTimeout(function () {
+                    checkQueue();
+                }, null);
+            }
+            else {
+                process.removeListener('exit', _this.exitHandler);
+                process.removeListener('uncaughtException', _this.exitHandler);
+                if (err)
+                    throw err;
+            }
+        };
+        checkQueue();
+    };
+    /**
+     * Remove Transform
+     * Removes transform from queue.
+     *
+     * @param transform to remove.
+     */
+    VStor.prototype.removeQueue = function (transform) {
+        if (~this._queue.indexOf(transform))
+            this._queue.splice(this._queue.indexOf(transform), 1);
+    };
     /**
      * Extend
      * : Extends glob options.
@@ -262,6 +312,17 @@ var VStor = /** @class */ (function (_super) {
             return path_1.join(path, '**');
         throw new Error('Path is neither a file or directory.');
     };
+    Object.defineProperty(VStor.prototype, "queue", {
+        /**
+         * Is Streaming
+         * Flag indicating if is streaming.
+         */
+        get: function () {
+            return this._queue;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Resolve Key
      * : Takes a path and resolves it relative to base.
@@ -385,10 +446,14 @@ var VStor = /** @class */ (function (_super) {
             rootPath = this.commonDir(origFrom);
         }
         paths.forEach(function (f) {
-            if (rootPath)
+            if (rootPath) {
+                // copy multiple.
                 copyFile(f, path_1.join(to, path_1.relative(rootPath, f)));
-            else
+            }
+            else {
+                // copy single file.
                 copyFile(f, to);
+            }
         });
         return this;
     };
@@ -476,6 +541,7 @@ var VStor = /** @class */ (function (_super) {
      * @param fn a callback function on done.
      */
     VStor.prototype.save = function (filters, fn) {
+        var _this = this;
         if (chek_1.isFunction(filters)) {
             fn = filters;
             filters = undefined;
@@ -510,8 +576,20 @@ var VStor = /** @class */ (function (_super) {
         var stream = filters.reduce(function (s, filter) {
             return s.pipe(filter);
         }, this.stream());
-        stream.on('finish', chek_1.noopIf(fn));
-        return this;
+        this._queue.push(stream);
+        return new Promise(function (resolve, reject) {
+            stream.on('error', function (err) {
+                _this.removeQueue(stream);
+                chek_1.noopIf(fn)(err);
+                reject(err);
+            });
+            stream.on('finish', function () {
+                _this.removeQueue(stream);
+                console.log('stream finished queue len:', _this._queue.length);
+                chek_1.noopIf(fn)();
+                resolve();
+            });
+        });
     };
     return VStor;
 }(events_1.EventEmitter));

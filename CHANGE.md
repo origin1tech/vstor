@@ -2,6 +2,13 @@
 
 List of module changes.
 
+### 2.14.2018 (v1.0.9)
+
+<table>
+  <tr><td>options.saveOnExit</td><td>option to trigger save on process exit.</td></tr>
+  <tr><td>options.waitOnExit</td><td>option to wait until stream queue is empty before exit.</td></tr>
+</table>
+
 ### 10.24.2017 (v1.0.8)
 
 <table>

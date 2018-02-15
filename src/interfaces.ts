@@ -19,6 +19,8 @@ export interface IMap<T> {
 export interface IVStorOptions {
   basePath?: string;
   jsonSpacer?: string | number;
+  saveOnExit?: boolean;
+  waitOnExit?: boolean;
 }
 
 export interface IVinylOptions {

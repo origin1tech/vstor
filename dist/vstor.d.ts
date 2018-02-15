@@ -7,8 +7,23 @@ export declare class VStor extends EventEmitter {
     private _cwd;
     private _base;
     private _store;
+    private _queue;
     options: IVStorOptions;
-    constructor(options?: Partial<IVStorOptions>);
+    constructor(options?: IVStorOptions);
+    /**
+     * Exit Handler
+     *
+     * @param type the type of handler.
+     * @param err uncaught error.
+     */
+    private exitHandler(type, err);
+    /**
+     * Remove Transform
+     * Removes transform from queue.
+     *
+     * @param transform to remove.
+     */
+    private removeQueue(transform);
     /**
      * Extend
      * : Extends glob options.
@@ -104,6 +119,11 @@ export declare class VStor extends EventEmitter {
       */
     private globify(path);
     /**
+     * Is Streaming
+     * Flag indicating if is streaming.
+     */
+    readonly queue: Transform[];
+    /**
      * Resolve Key
      * : Takes a path and resolves it relative to base.
      *
@@ -193,5 +213,5 @@ export declare class VStor extends EventEmitter {
      * @param filters transform filters which will be piped to stream.
      * @param fn a callback function on done.
      */
-    save(filters?: Transform[] | SaveCallback, fn?: SaveCallback): this;
+    save(filters?: Transform[] | SaveCallback, fn?: SaveCallback): Promise<{}>;
 }

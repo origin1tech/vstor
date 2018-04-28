@@ -312,7 +312,7 @@ export class VStor extends EventEmitter {
     *
     * @param path the path or array of path and pattern.
     */
-  private globify(path: string | string[]) {
+  globify(path: string | string[]) {
 
     if (isArray(path)) // recursion if array.
       return (path as string[]).reduce((f, p) => f.concat(this.globify(p)));

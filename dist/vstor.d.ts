@@ -117,7 +117,7 @@ export declare class VStor extends EventEmitter {
       *
       * @param path the path or array of path and pattern.
       */
-    private globify(path);
+    globify(path: string | string[]): any;
     /**
      * Is Streaming
      * Flag indicating if is streaming.
